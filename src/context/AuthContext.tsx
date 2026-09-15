@@ -1,58 +1,112 @@
-import { createContext, useContext, useState, useMemo, useCallback, type ReactNode } from 'react';
-import type { MockUser } from '../types';
-import { api } from '../lib/api';
-import { loadJSON, saveJSON, STORAGE_KEYS } from '../lib/storage';
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from "react";
+import { api } from "../lib/api";
 
-type AuthResult = { ok: boolean; error?: string };
-interface AuthContextValue {
-  user: MockUser | null;
-  signup: (user: MockUser) => Promise<AuthResult>;
-  login: (email: string, password: string) => Promise<AuthResult>;
+type User = {
+  id?: number;
+  email: string;
+  name?: string;
+  full_name?: string;
+};
+
+type AuthContextType = {
+  user: User | null;
+  loading: boolean;
+  login: (email: string, password: string) => Promise<void>;
+  signup: (payload: unknown) => Promise<void>;
   logout: () => void;
-  updateProfile: (patch: Partial<MockUser>) => void;
-}
-const AuthContext = createContext<AuthContextValue | null>(null);
+};
 
-function toMockUser(data: any, password = ''): MockUser {
-  return { name: data.name, email: data.email, password, preferredLanguage: data.preferredLanguage || 'en', country: data.country || 'India', travelInterests: data.travelInterests || [] };
-}
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<MockUser | null>(() => loadJSON<MockUser | null>(STORAGE_KEYS.currentUser, null));
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  const persist = (next: MockUser) => { saveJSON(STORAGE_KEYS.currentUser, next); setUser(next); };
+  useEffect(() => {
+    const token = localStorage.getItem("sanskritix_token");
 
-  const signup = useCallback(async (newUser: MockUser): Promise<AuthResult> => {
-    try {
-      const result: any = await api.signup({ name: newUser.name, email: newUser.email, password: newUser.password, preferredLanguage: newUser.preferredLanguage, country: newUser.country, travelInterests: newUser.travelInterests });
-      localStorage.setItem('sanskritix_token', result.access_token);
-      persist(toMockUser(result.user, ''));
-      return { ok: true };
-    } catch (error) {
-      return { ok: false, error: error instanceof Error ? error.message : 'Unable to create account.' };
+    if (!token) {
+      setLoading(false);
+      return;
     }
+
+    api.me()
+      .then((data: any) => {
+        setUser(data);
+      })
+      .catch(() => {
+        localStorage.removeItem("sanskritix_token");
+        setUser(null);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
-  const login = useCallback(async (email: string, password: string): Promise<AuthResult> => {
-    try {
-      const result: any = await api.login(email, password);
-      localStorage.setItem('sanskritix_token', result.access_token);
-      persist(toMockUser(result.user, ''));
-      return { ok: true };
-    } catch (error) {
-      // Keep the app usable if the API is not running yet.
-      const users = loadJSON<MockUser[]>(STORAGE_KEYS.users, []);
-      const found = users.find((u) => u.email.toLowerCase() === email.toLowerCase() && u.password === password);
-      if (found) { persist(found); return { ok: true }; }
-      return { ok: false, error: error instanceof Error ? error.message : 'Unable to sign in.' };
+  const login = async (email: string, password: string) => {
+    const data: any = await api.login(email, password);
+
+    if (data.access_token) {
+      localStorage.setItem(
+        "sanskritix_token",
+        data.access_token
+      );
     }
-  }, []);
 
-  const logout = useCallback(() => { localStorage.removeItem(STORAGE_KEYS.currentUser); localStorage.removeItem('sanskritix_token'); setUser(null); }, []);
-  const updateProfile = useCallback((patch: Partial<MockUser>) => {
-    setUser((prev) => { if (!prev) return prev; const updated = { ...prev, ...patch }; saveJSON(STORAGE_KEYS.currentUser, updated); return updated; });
-  }, []);
-  const value = useMemo(() => ({ user, signup, login, logout, updateProfile }), [user, signup, login, logout, updateProfile]);
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+    const loggedInUser = data.user || data;
+
+    setUser(loggedInUser);
+  };
+
+  const signup = async (payload: unknown) => {
+    const data: any = await api.signup(payload);
+
+    if (data.access_token) {
+      localStorage.setItem(
+        "sanskritix_token",
+        data.access_token
+      );
+    }
+
+    const signedUpUser = data.user || data;
+
+    setUser(signedUpUser);
+  };
+
+  const logout = () => {
+    localStorage.removeItem("sanskritix_token");
+    setUser(null);
+  };
+
+  return (
+    <AuthContext.Provider
+      value={{
+        user,
+        loading,
+        login,
+        signup,
+        logout,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 }
-export function useAuth() { const ctx = useContext(AuthContext); if (!ctx) throw new Error('useAuth must be used within AuthProvider'); return ctx; }
+
+export function useAuth() {
+  const context = useContext(AuthContext);
+
+  if (!context) {
+    throw new Error(
+      "useAuth must be used inside AuthProvider"
+    );
+  }
+
+  return context;
+}
