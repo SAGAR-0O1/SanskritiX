@@ -140,8 +140,6 @@ export const UI: Dict = {
   history: { en: 'History', hi: 'इतिहास', ta: 'வரலாறு', bn: 'ইতিহাস', fr: 'Histoire' },
   stories: { en: 'Local Stories', hi: 'स्थानीय कहानियाँ', ta: 'உள்ளூர் கதைகள்', bn: 'স্থানীয় গল্প', fr: 'Histoires locales' },
 
-  // Additional interface keys not present in the reference LANG object,
-  // added so the rest of the app (auth, profile, saved, feedback) stays translated.
   navSaved: { en: 'Saved', hi: 'सहेजे गए', ta: 'சேமிக்கப்பட்டவை', bn: 'সংরক্ষিত', fr: 'Enregistrés' },
   navProfile: { en: 'Profile', hi: 'प्रोफ़ाइल', ta: 'சுயவிவரம்', bn: 'প্রোফাইল', fr: 'Profil' },
   navAbout: { en: 'About', hi: 'परिचय', ta: 'எங்களைப் பற்றி', bn: 'সম্পর্কে', fr: 'À propos' },
