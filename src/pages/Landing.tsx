@@ -105,7 +105,7 @@ export default function Landing() {
             <Link to="/start" className="flex-shrink-0 rounded-full bg-marigold px-7 py-3 text-sm font-semibold text-white hover:bg-marigolddark">
               {t('exploreBtn')}
             </Link>
-            <Link to="/agra/planner?journey=1" className="flex-shrink-0 rounded-full border border-white/25 bg-white/10 px-7 py-3 text-sm font-bold text-white hover:bg-white/15">
+            <Link to="/destination/agra/plan" className="flex-shrink-0 rounded-full border border-white/25 bg-white/10 px-7 py-3 text-sm font-bold text-white hover:bg-white/15">
               ✨ Explore the Journey
             </Link>
           </div>

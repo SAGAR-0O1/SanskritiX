@@ -5,7 +5,7 @@ export default function StreetCard({ item }: { item: StreetItem }) {
   const images = item.images && item.images.length > 0 ? item.images : [''];
 
   return (
-    <div className="flex flex-col overflow-hidden rounded-2xl border border-stoneline bg-white transition-shadow hover:shadow-md">
+    <div className="flex flex-col overflow-hidden rounded-2xl border border-stoneline bg-white sanskriti-card transition-shadow hover:shadow-md">
       {images.length === 1 ? (
         <PlaceholderImage src={images[0]} alt={item.name} ratio="aspect-[16/10]" />
       ) : (

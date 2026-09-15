@@ -16,7 +16,7 @@ export default function StayCard({
   mapUrl,
 }: Props) {
   return (
-    <div className="rounded-2xl border border-stoneline bg-white p-5 shadow-sm">
+    <div className="rounded-2xl border border-stoneline bg-white sanskriti-card p-5 shadow-sm">
       <span className="rounded-full bg-stone-100 px-3 py-1 text-xs font-semibold text-ink">
         {type}
       </span>

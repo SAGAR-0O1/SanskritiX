@@ -10,7 +10,7 @@ export default function HelplineCard({
   description,
 }: Props) {
   return (
-    <div className="rounded-2xl border border-stoneline bg-white p-5 shadow-sm">
+    <div className="rounded-2xl border border-stoneline bg-white sanskriti-card p-5 shadow-sm">
       <h3 className="text-lg font-semibold text-ink">
         {name}
       </h3>

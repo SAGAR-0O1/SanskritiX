@@ -12,7 +12,7 @@ export default function PriceGuideCard({
   note,
 }: Props) {
   return (
-    <div className="rounded-2xl border border-stoneline bg-white p-5 shadow-sm">
+    <div className="rounded-2xl border border-stoneline bg-white sanskriti-card p-5 shadow-sm">
       <p className="text-xs font-bold uppercase tracking-wide text-marigold">
         {category}
       </p>

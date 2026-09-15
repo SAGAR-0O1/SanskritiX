@@ -27,11 +27,11 @@ export default function StatePage() {
       <Section title="Destinations in this state">
         {destinations.length === 0 ? (
           <EmptyState
-            title=""
-            description={`${state.name}`}
+            title="No destinations listed yet"
+            description={`SanskritiX is preparing destination information for ${state.name}. You can still search the wider India catalogue.`}
             action={
-              <Link to="/destination/agra" className="rounded-full bg-madder px-5 py-2.5 text-sm font-semibold text-white hover:bg-madderdark">
-                See the Agra example
+              <Link to="/search" className="rounded-full bg-madder px-5 py-2.5 text-sm font-semibold text-white hover:bg-madderdark">
+                Search India
               </Link>
             }
           />

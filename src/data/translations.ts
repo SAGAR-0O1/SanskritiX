@@ -79,11 +79,11 @@ export const UI: Dict = {
     fr: 'UNE NOTE DE SANSKRITIX',
   },
   Note: {
-    en: 'The best stories leave room for your own question.',
-    hi: 'सबसे अच्छी कहानियाँ आपके अपने प्रश्न के लिए जगह छोड़ देती हैं।',
-    ta: 'சிறந்த கதைகள் உங்கள் சொந்த கேள்விக்கு இடம் விடும்.',
-    bn: 'সেরা গল্পগুলো আপনার নিজের প্রশ্নের জন্য জায়গা রাখে।',
-    fr: 'Les meilleures histoires laissent place à votre propre question.',
+    en: 'Every destination has a story worth slowing down for.',
+    hi: 'हर गंतव्य की एक ऐसी कहानी होती है जिसे समझने के लिए थोड़ा ठहरना चाहिए।',
+    ta: 'ஒவ்வொரு இடத்திற்கும் சற்று நின்று அறிய வேண்டிய ஒரு கதை உள்ளது.',
+    bn: 'প্রতিটি গন্তব্যের এমন একটি গল্প আছে যার জন্য একটু থামা দরকার।',
+    fr: 'Chaque destination a une histoire qui mérite qu'on prenne le temps de la découvrir.',
   },
   threadEyebrow: { en: 'CHOOSE A THREAD', hi: 'एक धागा चुनें', ta: 'ஒரு நூலைத் தேர்வு செய்யுங்கள்', bn: 'একটি সুতো বেছে নিন', fr: 'CHOISISSEZ UN FIL' },
   threadTitle: {

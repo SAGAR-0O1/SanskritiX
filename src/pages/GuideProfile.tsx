@@ -50,7 +50,7 @@ export default function GuideProfile() {
       <div className="border-b border-stoneline bg-white">
         <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6">
           <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
-            <PlaceholderImage src={guide.photo} alt={guide.name} ratio="aspect-square" className="w-20  flex-shrink-0 rounded-2xl" />
+            <PlaceholderImage src={guide.photo} alt={guide.name} ratio="aspect-square" className="h-16 w-16 max-h-16 max-w-16 flex-shrink-0 rounded-2xl object-cover" />
             <div>
               <h1 className="font-display text-2xl font-semibold text-ink sm:text-3xl">{guide.name}</h1>
               <p className="mt-1 text-inksoft">

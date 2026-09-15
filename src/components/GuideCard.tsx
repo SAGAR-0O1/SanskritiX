@@ -5,8 +5,8 @@ import PlaceholderImage from './PlaceholderImage';
 
 export default function GuideCard({ guide }: { guide: Guide }) {
   return (
-    <Link to={`/guides/${guide.id}`} className="flex gap-4 rounded-2xl border border-stoneline bg-white p-4 transition-shadow hover:shadow-md">
-      <PlaceholderImage src={guide.photo} alt={guide.name} ratio="aspect-square" className="w-20 h-20 flex-shrink-0 rounded-xl" />
+    <Link to={`/guides/${guide.id}`} className="flex gap-4 rounded-2xl border border-stoneline bg-white sanskriti-card p-4 transition-shadow hover:shadow-md">
+      <PlaceholderImage src={guide.photo} alt={guide.name} ratio="aspect-square" className="h-16 w-16 max-h-16 max-w-16 flex-shrink-0 rounded-xl object-cover" />
       <div className="flex flex-1 flex-col">
         <p className="font-display text-lg font-semibold text-ink">{guide.name}</p>
         <p className="text-sm text-muted">{guide.city}</p>

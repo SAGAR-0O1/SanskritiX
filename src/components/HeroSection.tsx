@@ -27,9 +27,6 @@ export default function HeroSection() {
             <Link to="/start" className="rounded-full bg-madder px-6 py-3 text-sm font-semibold text-white hover:bg-madderdark">
               ✨ Plan My Trip
             </Link>
-            <Link to="/guides" className="rounded-full border border-ink px-6 py-3 text-sm font-semibold text-ink hover:bg-ink hover:text-white">
-              {t('guideBtn')}
-            </Link>
           </div>
 
           <div className="mt-6 flex items-center gap-2.5 text-sm text-muted">
@@ -70,7 +67,7 @@ export default function HeroSection() {
           </span>
           <div className="absolute bottom-6 left-6 right-24 rounded-2xl bg-white p-5 shadow-lg">
             <span className="mb-2 block text-xs font-bold tracking-wide text-marigold">{t('noteTag')}</span>
-            <p className="font-display text-base italic leading-snug text-ink">&ldquo;{t('note')}&rdquo;</p>
+            <p className="font-display text-base italic leading-snug text-ink">&ldquo;{t('Note')}&rdquo;</p>
           </div>
         </div>
       </div>

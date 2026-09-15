@@ -26,7 +26,6 @@ export default function Navbar() {
         <nav className="hidden flex-1 items-center justify-center gap-8 md:flex">
           <NavLink to="/explore" className={linkClass}>{t('explore')}</NavLink>
           <NavLink to="/states" className={linkClass}>{t('states')}</NavLink>
-          <NavLink to="/guides" className={linkClass}>{t('guides')}</NavLink>
           <NavLink to="/experiences" className={linkClass}>Experiences</NavLink>
         </nav>
 
@@ -83,7 +82,6 @@ export default function Navbar() {
           <nav className="flex flex-col gap-3 py-2">
             <NavLink to="/explore" className={linkClass} onClick={() => setMenuOpen(false)}>{t('explore')}</NavLink>
             <NavLink to="/states" className={linkClass} onClick={() => setMenuOpen(false)}>{t('states')}</NavLink>
-            <NavLink to="/guides" className={linkClass} onClick={() => setMenuOpen(false)}>{t('guides')}</NavLink>
             <NavLink to="/experiences" className={linkClass} onClick={() => setMenuOpen(false)}>Experiences</NavLink>
           </nav>
           <div className="flex items-center justify-between border-t border-stoneline pt-3">

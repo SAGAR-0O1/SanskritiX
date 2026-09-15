@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { getAllDestinations } from '../data/repository';
 
 type Status = 'idle' | 'detecting' | 'detected' | 'denied' | 'unsupported';
 
@@ -13,12 +14,12 @@ export default function StartTrip() {
   const [city, setCity] = useState('');
   const [message, setMessage] = useState('');
 
-  function chooseAgra(source: 'gps' | 'manual') {
-    setCity('Agra');
-    localStorage.setItem('sanskritix_detected_city', 'Agra');
+  function chooseCity(nextCity: string, source: 'gps' | 'manual') {
+    setCity(nextCity);
+    localStorage.setItem('sanskritix_detected_city', nextCity);
     localStorage.setItem('sanskritix_location_source', source);
     setStatus('detected');
-    setMessage(source === 'gps' ? 'Your browser location points to our Agra  area.' : 'Agra selected for the .');
+    setMessage(source === 'gps' ? `Your browser location matched ${nextCity}.` : `${nextCity} selected. You can change it anytime.`);
   }
 
   function detectLocation() {
@@ -33,15 +34,15 @@ export default function StartTrip() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         if (isNearAgra(position.coords.latitude, position.coords.longitude)) {
-          chooseAgra('gps');
+          chooseCity('Agra', 'gps');
         } else {
           setStatus('denied');
-          setMessage('We could not match your location to a supported  city yet. Select Agra manually to continue.');
+          setMessage('We could not automatically match your location to a city yet. Choose a destination below to continue.');
         }
       },
       () => {
         setStatus('denied');
-        setMessage('Location access was not available. No problem — you can continue by selecting Agra manually.');
+        setMessage('Location access was not available. No problem — you can continue by selecting a city manually.');
       },
       { enableHighAccuracy: false, timeout: 8000, maximumAge: 300000 },
     );
@@ -49,16 +50,18 @@ export default function StartTrip() {
 
   useEffect(() => {
     const saved = localStorage.getItem('sanskritix_detected_city');
-    if (saved === 'Agra') {
-      setCity('Agra');
+    if (saved) {
+      setCity(saved);
       setStatus('detected');
-      setMessage('Agra is saved as your last selected  city.');
+      setMessage(`${saved} is saved as your last selected city.`);
     }
   }, []);
 
   function continueToTrip() {
     if (!city) return;
-    navigate('/agra/planner');
+    const destination = getAllDestinations().find((d) => d.name.toLowerCase() === city.toLowerCase());
+    if (destination) navigate(`/destination/${destination.id}/plan`);
+    else navigate('/explore');
   }
 
   return (
@@ -69,7 +72,7 @@ export default function StartTrip() {
 
           <div className="mt-12 grid gap-8 md:grid-cols-[1.05fr_.95fr] md:items-center">
             <div>
-              <div className="mb-5 flex flex-wrap items-center gap-2"><span className="rounded-full border border-marigold/30 bg-marigold/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-marigold">SanskritiX Journey</span><span className="rounded-full border border-stoneline bg-paper px-3 py-1 text-[11px] font-semibold text-inksoft"> • Agra</span></div>
+              <div className="mb-5 flex flex-wrap items-center gap-2"><span className="rounded-full border border-marigold/30 bg-marigold/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-marigold">SanskritiX Journey</span><span className="rounded-full border border-stoneline bg-paper px-3 py-1 text-[11px] font-semibold text-inksoft"> • India</span></div>
               <h1 className="mt-3 font-display text-4xl font-semibold leading-tight text-ink sm:text-6xl">
                 Let’s start with <span className="text-madder">where you are.</span>
               </h1>
@@ -86,13 +89,15 @@ export default function StartTrip() {
                 >
                   {status === 'detecting' ? '📍 Detecting…' : '📍 Detect My Location'}
                 </button>
-                <button
-                  aria-label="Select Agra manually"
-                  onClick={() => chooseAgra('manual')}
-                  className="rounded-full border border-ink px-6 py-3 text-sm font-semibold text-ink hover:bg-ink hover:text-white"
+                <select
+                  aria-label="Select a city"
+                  value={city}
+                  onChange={(e) => e.target.value && chooseCity(e.target.value, 'manual')}
+                  className="rounded-full border border-ink bg-white px-5 py-3 text-sm font-semibold text-ink outline-none"
                 >
-                  Select Agra Manually
-                </button>
+                  <option value="">Select a City</option>
+                  {getAllDestinations().map((d) => <option key={d.id} value={d.name}>{d.name}</option>)}
+                </select>
               </div>
 
               {message && (
@@ -133,7 +138,7 @@ export default function StartTrip() {
             <div>
               <p className="text-xs font-bold uppercase tracking-wide text-marigold">Selected destination</p>
               <h2 className="mt-1 font-display text-2xl font-semibold text-ink">{city || 'No city selected yet'}</h2>
-              <p className="mt-1 text-sm text-inksoft">{city ? 'Ready to personalise your journey.' : 'Detect your location or choose the  city above.'}</p>
+              <p className="mt-1 text-sm text-inksoft">{city ? 'Ready to personalise your journey.' : 'Detect your location or choose a city above.'}</p>
             </div>
             <button
               onClick={continueToTrip}
@@ -144,7 +149,7 @@ export default function StartTrip() {
             </button>
           </div>
         </div>
-        <p className="mt-4 text-center text-xs leading-5 text-muted"> Note: city detection currently supports Agra. Real reverse-geocoding and multi-city support can be connected later.</p>
+        <p className="mt-4 text-center text-xs leading-5 text-muted">Location detection uses browser coordinates where a city match is available. Manual city selection is always available.</p>
       </section>
     </main>
   );

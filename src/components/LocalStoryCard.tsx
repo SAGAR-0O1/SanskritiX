@@ -2,7 +2,7 @@ import type { LocalStory } from '../types';
 
 export default function LocalStoryCard({ story }: { story: LocalStory }) {
   return (
-    <div className="rounded-2xl border border-stoneline bg-white p-5">
+    <div className="rounded-2xl border border-stoneline bg-white sanskriti-card p-5">
       <div className="flex items-start justify-between gap-3">
         <h4 className="font-display text-base font-semibold text-ink">{story.title}</h4>
         {story.folklore && (

@@ -14,7 +14,7 @@ export default function HiddenPlaceCard({
   mapUrl,
 }: Props) {
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-stoneline bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-stoneline bg-white sanskriti-card shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg">
       <div className="h-2 bg-marigold" />
 
       <div className="flex flex-1 flex-col p-6">

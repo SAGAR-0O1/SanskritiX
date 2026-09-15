@@ -14,6 +14,7 @@ import AgraEvents from './pages/AgraEvents';
 import AgraStayEat from './pages/AgraStayEat';
 import AgraArtsCrafts from './pages/AgraArtsCrafts';
 import AgraLocalStories from './pages/AgraLocalStories';
+import CityPlanner from './pages/CityPlanner';
 
 import Landing from './pages/Landing';
 import StartTrip from './pages/StartTrip';
@@ -55,6 +56,7 @@ export default function App() {
                   <Route path="/states" element={<Explore />} />
                   <Route path="/states/:stateId" element={<StatePage />} />
                   <Route path="/destination/:destinationId" element={<DestinationPage />} />
+                  <Route path="/destination/:destinationId/plan" element={<CityPlanner />} />
                   <Route path="/place/:placeId" element={<PlacePage />} />
                   <Route path="/agra/plan" element={<AgraPlanner />} />
                   <Route path="/agra/planner" element={<AgraPlanner />} />

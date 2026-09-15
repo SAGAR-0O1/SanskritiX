@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import ItineraryCard from '../components/ItineraryCard';
 import data from '../data/agraFeatures.json';
+import AnimatedRoutePath from '../components/AnimatedRoutePath';
 
 type TripId = 'agra-1-day' | 'agra-2-day' | 'agra-3-day';
 type Budget = 'budget' | 'comfort' | 'premium';
@@ -828,25 +829,10 @@ export default function AgraPlanner() {
                     <div><p className="text-xs font-bold uppercase tracking-widest text-marigold">Path summary</p><p className="mt-1 text-sm text-white/60">Day-wise connected journey</p></div>
                     <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold">{routeStops.length} stops</span>
                   </div>
-                  <div className="relative mt-7">
-                    <div className="absolute left-[19px] top-5 bottom-5 w-[4px] rounded-full bg-white/20" />
-                    <div className="space-y-1">
-                      {routeSegments.map(({ stop, segment }, index) => {
-                        const active = liveMode && index === activeStop;
-                        return (
-                          <div key={`${stop.name}-${index}`}>
-                            {index > 0 && (
-                              <div className="ml-[42px] flex items-center gap-2 py-3 text-xs text-white/55">
-                                <span>{segment.icon}</span><span>{segment.travelTime}</span><span>·</span><span>{segment.distance}</span><span>·</span><span>{segment.mode}</span>
-                              </div>
-                            )}
-                            <div className={`relative flex gap-4 rounded-2xl p-3 transition ${active ? 'bg-white/15 ring-1 ring-marigold' : 'hover:bg-white/5'}`}>
-                              <div className={`z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 text-sm font-bold ${active ? 'border-marigold bg-marigold text-white' : 'border-white/30 bg-ink text-white'}`}>{index + 1}</div>
-                              <div className="min-w-0 pt-1"><p className="text-xs text-white/50">Day {stop.day} · {stop.time}</p><p className="font-semibold">{stop.name}</p><p className="mt-1 text-xs text-white/60">{stop.duration}</p></div>
-                            </div>
-                          </div>
-                        );
-                      })}
+                  <div className="mt-7">
+                    <AnimatedRoutePath stops={routeStops.map((stop) => ({ name: stop.name }))} activeStop={liveMode ? activeStop : 0} />
+                    <div className="mt-5 space-y-2">
+                      {routeSegments.map(({ stop, segment }, index) => <div key={`${stop.name}-${index}`} className={`flex flex-wrap items-center gap-2 rounded-xl px-3 py-2 text-xs ${liveMode && index === activeStop ? 'bg-white/15 ring-1 ring-marigold' : 'bg-white/5 text-white/65'}`}><span className="font-bold text-white">{index+1}. {stop.name}</span>{index>0 && <><span>·</span><span>{segment.icon} {segment.travelTime}</span><span>·</span><span>{segment.distance}</span><span>·</span><span>{segment.mode}</span></>}</div>)}
                     </div>
                   </div>
                 </div>

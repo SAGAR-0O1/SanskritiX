@@ -5,7 +5,7 @@ import SaveButton from './SaveButton';
 
 export default function PlaceCard({ place }: { place: Place }) {
   return (
-    <div className="group relative flex flex-col overflow-hidden rounded-2xl border border-stoneline bg-white transition-shadow hover:shadow-md">
+    <div className="group relative flex flex-col overflow-hidden rounded-2xl border border-stoneline bg-white sanskriti-card transition-shadow hover:shadow-md">
       <Link to={`/place/${place.id}`}>
         <PlaceholderImage src={place.media.images.find(Boolean)} alt={place.name} />
       </Link>

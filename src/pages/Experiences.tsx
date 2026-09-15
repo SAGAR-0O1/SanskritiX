@@ -12,10 +12,10 @@ const cities = [
 ];
 
 const groupTours = [
-  { city: 'Agra', title: 'Agra Heritage Group Walk', duration: '4 hours', price: '₹999', detail: 'Taj Mahal • Agra Fort • local stories' },
-  { city: 'Jaipur', title: 'Jaipur Royal City Tour', duration: '5 hours', price: '₹1,299', detail: 'Forts • old city • crafts & bazaars' },
-  { city: 'Varanasi', title: 'Varanasi Culture & Ghats', duration: '5 hours', price: '₹1,199', detail: 'Ghats • old lanes • local traditions' },
-  { city: 'Delhi', title: 'Old Delhi Cultural Trail', duration: '4 hours', price: '₹999', detail: 'Heritage • markets • street food' },
+  { id: 'local-agra-heritage', city: 'Agra', title: 'Agra Heritage Group Walk', duration: '4 hours', price: '₹999', detail: 'Taj Mahal • Agra Fort • local stories' },
+  { id: 'local-jaipur-royal', city: 'Jaipur', title: 'Jaipur Royal City Tour', duration: '5 hours', price: '₹1,299', detail: 'Forts • old city • crafts & bazaars' },
+  { id: 'local-varanasi-ghats', city: 'Varanasi', title: 'Varanasi Culture & Ghats', duration: '5 hours', price: '₹1,199', detail: 'Ghats • old lanes • local traditions' },
+  { id: 'local-delhi-cultural', city: 'Delhi', title: 'Old Delhi Cultural Trail', duration: '4 hours', price: '₹999', detail: 'Heritage • markets • street food' },
 ];
 
 const privateTours = [
@@ -41,8 +41,7 @@ export default function Experiences() {
   const cityTours = (remoteTours?.filter((tour) => tour.kind === 'group' && tour.city === city).map((tour) => ({ ...tour, price: `₹${Number(tour.price).toLocaleString('en-IN')}` })) || groupTours.filter((tour) => tour.city === city));
 
   const book = (tour: any) => {
-    if (tour?.id) { setBookingTour(tour); setBookingMessage(''); return; }
-    setMessage(`Your enquiry for ${tour.title || tour} is ready. SanskritiX can match your group with a professional guide and confirm timing.`);
+    setBookingTour(tour); setBookingMessage('');
   };
 
   const confirmBooking = async () => {
@@ -50,6 +49,13 @@ export default function Experiences() {
     if (!user) { navigate('/login'); return; }
     if (!travelDate) { setBookingMessage('Please choose a travel date.'); return; }
     try {
+      if (String(bookingTour.id).startsWith('local-')) {
+        const saved = JSON.parse(localStorage.getItem('sanskritix_local_bookings') || '[]');
+        saved.push({ id: Date.now(), tour: bookingTour.title, city: bookingTour.city, travelDate, people, language, createdAt: new Date().toISOString() });
+        localStorage.setItem('sanskritix_local_bookings', JSON.stringify(saved));
+        setBookingMessage('Request saved. SanskritiX will confirm the guide and timing for this experience.');
+        return;
+      }
       const result: any = await api.createBooking({ tour_id: bookingTour.id, travel_date: travelDate, people, language });
       setBookingMessage(`Booking request #${result.id} created. Total: ₹${Number(result.total_amount).toLocaleString('en-IN')}.`);
       setBookingTour(null);

@@ -2,7 +2,7 @@ import type { RitualItem } from '../types';
 
 export default function RitualCard({ item }: { item: RitualItem }) {
   return (
-    <div className="flex flex-col rounded-2xl border border-stoneline bg-white p-5 transition-shadow hover:shadow-md">
+    <div className="flex flex-col rounded-2xl border border-stoneline bg-white sanskriti-card p-5 transition-shadow hover:shadow-md">
       {item.images && item.images.length > 0 && (
   <div className="mb-4 grid grid-cols-2 gap-2">
     {item.images.map((image, index) => (

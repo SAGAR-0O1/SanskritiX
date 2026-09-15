@@ -76,7 +76,7 @@ export interface RitualItem {
   whatVisitors: string;
   wear: string;
   etiquette: string[];
-  Note: string;
+  note: string;
   images?: string[];
 }
 

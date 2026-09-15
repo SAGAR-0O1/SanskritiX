@@ -19,7 +19,7 @@ type Props = {
 
 export default function ItineraryCard({ title, days }: Props) {
   return (
-    <div className="rounded-2xl border border-stoneline bg-white p-6 shadow-sm">
+    <div className="rounded-2xl border border-stoneline bg-white sanskriti-card p-6 shadow-sm">
       <h2 className="font-display text-2xl font-semibold text-ink">
         {title}
       </h2>

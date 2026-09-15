@@ -31,7 +31,6 @@ export default function Footer() {
           <FooterColumn
             heading="Community"
             links={[
-              { to: '/guides', label: t('guides') },
               { to: '/become-guide', label: 'Become a Guide' },
               { to: '/feedback', label: t('navFeedback') },
               { to: '/about', label: t('navAbout') },
@@ -46,7 +45,10 @@ export default function Footer() {
             ]}
           />
         </div>
-        <div className="mt-10 border-t border-white/15 pt-6 text-xs text-white/40">
+        <div className="mt-10 rounded-2xl border border-white/10 bg-white/5 p-4 text-xs leading-5 text-white/65">
+          <span className="font-semibold text-white">Content verification:</span> Destination information is reviewed against official government tourism, heritage and public-information resources wherever available. Availability, timings and local conditions should always be checked with the relevant authority before travel.
+        </div>
+        <div className="mt-4 border-t border-white/15 pt-6 text-xs text-white/40">
           SanskritiX brings discovery, planning, local experiences and travel support together in one place.
         </div>
       </div>

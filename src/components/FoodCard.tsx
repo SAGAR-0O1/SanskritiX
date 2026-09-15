@@ -3,7 +3,7 @@ import PlaceholderImage from './PlaceholderImage';
 
 export default function FoodCard({ item }: { item: FoodItem }) {
   return (
-    <div className="flex flex-col overflow-hidden rounded-2xl border border-stoneline bg-white transition-shadow hover:shadow-md">
+    <div className="flex flex-col overflow-hidden rounded-2xl border border-stoneline bg-white sanskriti-card transition-shadow hover:shadow-md">
       <PlaceholderImage
         src={item.img}
         alt={item.name}
