@@ -83,7 +83,7 @@ export const UI: Dict = {
     hi: 'हर गंतव्य की एक ऐसी कहानी होती है जिसे समझने के लिए थोड़ा ठहरना चाहिए।',
     ta: 'ஒவ்வொரு இடத்திற்கும் சற்று நின்று அறிய வேண்டிய ஒரு கதை உள்ளது.',
     bn: 'প্রতিটি গন্তব্যের এমন একটি গল্প আছে যার জন্য একটু থামা দরকার।',
-    fr: "Chaque destination a une histoire qui mérite qu'on prenne le temps de la découvrir.",
+    fr: 'Chaque destination a une histoire qui mérite qu''on prenne le temps de la découvrir.',
   },
   threadEyebrow: { en: 'CHOOSE A THREAD', hi: 'एक धागा चुनें', ta: 'ஒரு நூலைத் தேர்வு செய்யுங்கள்', bn: 'একটি সুতো বেছে নিন', fr: 'CHOISISSEZ UN FIL' },
   threadTitle: {
