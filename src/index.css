@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-sandstone text-ink font-body antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display text-ink;
+  }
+  :focus-visible {
+    outline: 2px solid #2B3A67;
+    outline-offset: 3px;
+  }
+}
+
+@layer utilities {
+  /* Subtle repeating motif inspired by jaali lattice screens, used sparingly as texture, never as noise. */
+  .jaali-texture {
+    background-image: radial-gradient(circle at 1px 1px, rgba(22,26,36,0.10) 1px, transparent 0);
+    background-size: 22px 22px;
+  }
+  .jaali-texture-light {
+    background-image: radial-gradient(circle at 1px 1px, rgba(243,236,221,0.16) 1px, transparent 0);
+    background-size: 22px 22px;
+  }
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
