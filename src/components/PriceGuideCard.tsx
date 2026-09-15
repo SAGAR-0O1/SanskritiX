@@ -2,7 +2,7 @@ type Props = {
   category: string;
   service: string;
   price: string;
-  Note: string;
+  note: string;
 };
 
 export default function PriceGuideCard({
