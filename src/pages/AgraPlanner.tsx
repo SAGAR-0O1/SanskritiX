@@ -44,7 +44,7 @@ type TravelSegment = {
   travelTime: string;
   mode: string;
   icon: string;
-  Note: string;
+  note: string;
   warning?: string;
   publicTransport: TransportStatus;
   publicTransportLabel: string;
@@ -107,49 +107,49 @@ function getTravelSegment(from: string, to: string, index: number): TravelSegmen
   const known: Record<string, TravelSegment> = {
     'Current location->Taj Mahal': {
       distance: '4.2 km', travelTime: '18 min', mode: 'Auto / Cab', icon: '🛺',
-      Note: 'Start early for the planned morning entry.', publicTransport: 'good', publicTransportLabel: 'Options generally available',
+      note: 'Start early for the planned morning entry.', publicTransport: 'good', publicTransportLabel: 'Options generally available',
       backup: 'Auto / Cab', backupFare: '₹100–180', returnAdvice: 'Return transport is usually easier from the main visitor corridor.',
     },
     'Taj Mahal->Agra Fort': {
       distance: '3.1 km', travelTime: '14 min', mode: 'Auto / Cab', icon: '🛺',
-      Note: 'A short city transfer between two major heritage stops.', publicTransport: 'good', publicTransportLabel: 'Options generally available',
+      note: 'A short city transfer between two major heritage stops.', publicTransport: 'good', publicTransportLabel: 'Options generally available',
       backup: 'Auto / Cab', backupFare: '₹80–150', returnAdvice: 'Keep your next transfer in mind around the busy afternoon period.',
     },
     'Agra Fort->Itmad-ud-Daulah': {
       distance: '4.3 km', travelTime: '18 min', mode: 'Auto / Cab', icon: '🛺',
-      Note: 'Allow extra time for city traffic.', publicTransport: 'limited', publicTransportLabel: 'May take longer',
+      note: 'Allow extra time for city traffic.', publicTransport: 'limited', publicTransportLabel: 'May take longer',
       backup: 'Auto / Cab', backupFare: '₹100–180', returnAdvice: 'If you finish late, prefer a pre-arranged ride rather than waiting on the roadside.',
     },
     'Itmad-ud-Daulah->Mehtab Bagh': {
       distance: '4.8 km', travelTime: '20 min', mode: 'Auto / Cab', icon: '🚕',
-      Note: 'Reach before sunset if the viewpoint is part of your plan.', warning: 'Return transport can be limited later in the evening. Plan your ride before leaving this area.',
+      note: 'Reach before sunset if the viewpoint is part of your plan.', warning: 'Return transport can be limited later in the evening. Plan your ride before leaving this area.',
       publicTransport: 'plan-ahead', publicTransportLabel: 'Plan your return before leaving', lastSuggestedTime: 'Before 6:30 PM',
       backup: 'Pre-booked Auto / Cab', backupFare: '₹120–220', returnAdvice: 'Arrange the return ride before entering the viewpoint area, especially for an evening visit.',
     },
     'Kinari Bazaar->Jama Masjid': {
       distance: '0.6 km', travelTime: '8 min', mode: 'Walk', icon: '🚶',
-      Note: 'A walkable Old Agra connection.', publicTransport: 'good', publicTransportLabel: 'Walking is simplest here',
+      note: 'A walkable Old Agra connection.', publicTransport: 'good', publicTransportLabel: 'Walking is simplest here',
       backup: 'Walk', backupFare: '₹0', returnAdvice: 'Stay on the planned pedestrian route between nearby stops.',
     },
     'Jama Masjid->Sadar Bazaar': {
       distance: '4.5 km', travelTime: '20 min', mode: 'Auto / Cab', icon: '🛺',
-      Note: 'Busy market traffic is possible around peak hours.', publicTransport: 'limited', publicTransportLabel: 'Allow extra waiting time',
+      note: 'Busy market traffic is possible around peak hours.', publicTransport: 'limited', publicTransportLabel: 'Allow extra waiting time',
       backup: 'Auto / Cab', backupFare: '₹100–180', returnAdvice: 'Keep a ride option ready if you are leaving after the market gets busy.',
     },
     'Sadar Bazaar->Agra Marble Market': {
       distance: '3.8 km', travelTime: '16 min', mode: 'Auto / Cab', icon: '🛺',
-      Note: 'Keep shopping time separate from your return journey.', warning: 'Public transport frequency may reduce later in the evening. Keep a return option ready.',
+      note: 'Keep shopping time separate from your return journey.', warning: 'Public transport frequency may reduce later in the evening. Keep a return option ready.',
       publicTransport: 'plan-ahead', publicTransportLabel: 'Return plan recommended', lastSuggestedTime: 'Before 7:00 PM',
       backup: 'Pre-arranged Auto / Cab', backupFare: '₹100–200', returnAdvice: 'Finish shopping with enough buffer to arrange your ride back to your stay.',
     },
     'Itmad-ud-Daulah->Ram Bagh': {
       distance: '2.7 km', travelTime: '12 min', mode: 'Auto / Cab', icon: '🛺',
-      Note: 'A short transfer along the Yamuna-side route.', publicTransport: 'limited', publicTransportLabel: 'May take longer',
+      note: 'A short transfer along the Yamuna-side route.', publicTransport: 'limited', publicTransportLabel: 'May take longer',
       backup: 'Auto / Cab', backupFare: '₹80–150', returnAdvice: 'Check your next ride before spending too long at the stop.',
     },
     'Ram Bagh->Mehtab Bagh': {
       distance: '5.9 km', travelTime: '24 min', mode: 'Auto / Cab', icon: '🚕',
-      Note: 'Keep your return transport in mind before the evening viewpoint.', warning: 'This route is more comfortable with a pre-arranged return ride after sunset.',
+      note: 'Keep your return transport in mind before the evening viewpoint.', warning: 'This route is more comfortable with a pre-arranged return ride after sunset.',
       publicTransport: 'plan-ahead', publicTransportLabel: 'Plan return transport first', lastSuggestedTime: 'Before 6:30 PM',
       backup: 'Pre-arranged Auto / Cab', backupFare: '₹150–250', returnAdvice: 'Do not wait until the viewpoint visit is over to arrange your return ride.',
     },
@@ -159,7 +159,7 @@ function getTravelSegment(from: string, to: string, index: number): TravelSegmen
     distance: index % 2 === 0 ? '2.8 km' : '4.1 km',
     travelTime: index % 2 === 0 ? '14 min' : '18 min',
     mode: 'Auto / Cab', icon: '🛺',
-    Note: ' route estimate — live routing can be connected later.',
+    note: ' route estimate — live routing can be connected later.',
     publicTransport: 'limited', publicTransportLabel: 'Live availability not connected',
     backup: 'Auto / Cab', backupFare: 'Check locally', returnAdvice: 'Keep a backup ride option ready.',
   };

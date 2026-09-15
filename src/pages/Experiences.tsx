@@ -36,7 +36,7 @@ export default function Experiences() {
   const [bookingMessage, setBookingMessage] = useState('');
   const { user } = useAuth();
   const navigate = useNavigate();
-  useEffect(() => { api.tours().then(setRemoteTours).catch(() => setRemoteTours(null)); }, []);
+  useEffect(() => { api.tours<any[]>().then(setRemoteTours).catch(() => setRemoteTours(null)); }, []);
   const selectedCity = useMemo(() => cities.find((item) => item.name === city) || cities[0], [city]);
   const cityTours = (remoteTours?.filter((tour) => tour.kind === 'group' && tour.city === city).map((tour) => ({ ...tour, price: `₹${Number(tour.price).toLocaleString('en-IN')}` })) || groupTours.filter((tour) => tour.city === city));
 
