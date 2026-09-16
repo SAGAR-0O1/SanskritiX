@@ -61,7 +61,7 @@ export default function DestinationPage() {
             ['🎨','Activities',`Find cultural, creative and outdoor experiences.`,'#activities'],
             ['📖','Local Stories',`Explore stories, memories and folklore, clearly labelled when uncertain.`,'#stories'],
             ['🧳','Make My Trip',`Build a personalised day plan for ${destination.name}.`,`/destination/${destination.id}/plan`],
-          ].map(([icon,title,desc,target]) => <a key={title} href={target} className={`${card} ${title === 'Make My Trip' ? 'border-marigold bg-marigold/95' : ''}`}><div className="text-4xl">{icon}</div><h3 className={`mt-4 font-display text-xl font-semibold ${title === 'Make My Trip' ? 'text-white' : 'text-ink'}`}>{title}</h3><p className={`mt-2 text-sm leading-6 ${title === 'Make My Trip' ? 'text-white/90' : 'text-inksoft'}`}>{desc}</p><span className={`mt-4 inline-block text-sm font-semibold ${title === 'Make My Trip' ? 'text-white' : 'text-marigold'}`}>{title === 'Make My Trip' ? 'Plan My Trip →' : 'Explore →'}</span></a>)}
+          ].map(([icon,title,desc,target]) => <a key={title} href={target} className={`${card} ${title === 'Make My Trip' ? 'border-marigold bg-marigold/95' : ''}`}><div className="text-4xl">{icon}</div><h3 className={`mt-4 font-display text-xl font-semibold ${title === 'Make My Trip' ? 'text-[#334155]' : 'text-ink'}`}>{title}</h3><p className={`mt-2 text-sm leading-6 ${title === 'Make My Trip' ? 'text-[#334155]' : 'text-inksoft'}`}>{desc}</p><span className={`mt-4 inline-block text-sm font-semibold ${title === 'Make My Trip' ? 'text-white' : 'text-marigold'}`}>{title === 'Make My Trip' ? 'Plan My Trip →' : 'Explore →'}</span></a>)}
         </div>
       </Section>
 
